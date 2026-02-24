@@ -1,0 +1,7 @@
+Books:
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    @for (item of getBooks(); track item.id)
+    {
+        <book-card [book]="item"></book-card>
+    }
+</div>

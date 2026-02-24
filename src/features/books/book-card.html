@@ -1,0 +1,24 @@
+<div class="card">
+    @if (!!book.coverUrl)
+    {
+        <img class="cover" src="{{book.coverUrl}}" />
+    }
+    @else
+    {
+        <img class="cover" src="icons/no-cover.png" alt="нет обложки" />
+    }
+    <p><b>{{book.title}}</b></p>
+    <p>Автор: {{book.author}}</p>
+    <p>Год издания: {{book.year}}</p>
+    <p>Жанр: 
+            @for (genre of book.genres; track genre; let isFirst = $first)
+            {
+                @if (!isFirst)
+                {
+                    {{' , '}}
+                }
+                {{genre}}
+            }
+    </p>
+    <p>Рейтинг: {{book.rating}}</p>
+</div>
