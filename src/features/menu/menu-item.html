@@ -1,0 +1,10 @@
+@if (href)
+{
+    <a href="{{href}}" 
+        style="background-image: url({{collapsedIcon}});">{{title}}</a>
+}
+@else
+{
+    <button (click)="onMenuClick()"
+        style="background-image: url({{collapsedIcon}});">{{title}}</button>
+}
