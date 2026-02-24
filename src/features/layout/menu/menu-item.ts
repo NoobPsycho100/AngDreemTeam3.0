@@ -11,11 +11,11 @@ export class MenuItem {
   protected isCollapsed: boolean = false;
 
   @Input()
-  public title = 'menu-item';
+  public title: string = 'menu-item';
   @Input()
-  public href = '';
+  public href: string = '';
   @Input()
-  public collapsedIcon = '';
+  public collapsedIcon: string = '';
   @Output()
   public menuClick = new EventEmitter();
 

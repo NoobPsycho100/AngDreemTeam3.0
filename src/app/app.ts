@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { MenuPanel } from '../features/menu/menu-panel';
-import { HeaderPanel } from '../features/header/header-panel';
-import { ContentPanel } from '../features/content-panel/content-panel';
+import { MenuPanel } from '../features/layout/menu/menu-panel';
+import { HeaderPanel } from '../features/layout/header/header-panel';
+import { ContentPanel } from '../features/layout/content-panel/content-panel';
 
 @Component({
   selector: 'app-root',
