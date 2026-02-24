@@ -1,6 +1,25 @@
-Books:
+<p>Books: <button id="booksSettings" (click)="collapseSettings()"></button></p>
+@if (!isSeetingsCollapsed)
+{
+    <div class="search-panel panel">
+        <div class="search-param"><h3>Поиск книг:</h3></div>
+        <div class="search-param"><p>Автор:</p><p><input type="text" #searchAuthor [(ngModel)]="searchAuthorValue"/></p></div>
+        <div class="search-param"><p>Название:</p><p><input type="text" #searchTitle [(ngModel)]="searchTitleValue"/></p></div>
+        <div class="search-param"><p>Год:</p><p><input type="text" #searchYear [(ngModel)]="searchYearValue"/></p></div>
+        <div class="search-param"><p>Жанры:</p><p>
+            <select #searchGenres (change)="onSelectGenre(searchGenres.value);">
+                <option value="{{null}}">--</option>
+                @for(genre of genres; track genre)
+                {
+                <option value="{{genre}}">{{genre}}</option>
+                }
+            </select></p></div>
+        <div class="search-param"><p>Рейтинг от:</p><p><input type="number" #searchRating [(ngModel)]="searchRatingValue"/></p></div>
+        <button id="search" (click)="search()">Искать</button>
+    </div>
+}
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
-    @for (item of getBooks(); track item.id)
+    @for (item of books; track item.id)
     {
         <book-card [book]="item"></book-card>
     }
