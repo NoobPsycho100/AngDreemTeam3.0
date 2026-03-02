@@ -7,7 +7,7 @@
     {
         <img class="cover" src="icons/no-cover.png" alt="нет обложки" />
     }
-    <p><b>{{book.title}}</b></p>
+    <p><b>{{book.title}}</b><span *appIfHighRating="book.rating" style="font-size: 200%; color: yellow; text-shadow: 2px 2px #ff0000;">★</span></p>
     <p>Автор: {{book.author}}</p>
     <p>Год издания: {{book.year}}</p>
     <p>Жанр: 
