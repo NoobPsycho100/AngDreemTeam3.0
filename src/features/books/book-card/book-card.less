@@ -8,10 +8,14 @@
     text-align: center;
 }
 
-.card:hover{
+:host.hover .card{
     border: 2px black solid;
     margin: 19px;
     cursor: pointer;
+}
+
+:host.active .card{
+    background: lightgray;
 }
 
 .card img.cover{

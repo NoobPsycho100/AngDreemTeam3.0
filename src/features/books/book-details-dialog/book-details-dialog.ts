@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Book } from '../../../core/data/books';
 
 @Component({
@@ -35,4 +35,10 @@ export class BookDetailsDialogComponent
 
   @Output()
   public dialogClose: EventEmitter<any> = new EventEmitter();
+
+  @HostListener("window:keydown.escape") 
+  protected onClick()
+  {
+    this.CloseDialog();
+  }
 }
