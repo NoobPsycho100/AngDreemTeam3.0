@@ -1,11 +1,16 @@
-<p>Books: <button id="booksSettings" (click)="collapseSettings()"></button></p>
+<p>Books: <button id="booksSettings" (click)="collapseSettings()"></button><button id="addBookButton" (click)="collapseAdding()">Добавить книгу</button></p>
 <books-search-panel *ngIf="!isSeetingsCollapsed" (search)="onSearch($event)"></books-search-panel>
+<add-book-panel *ngIf="!isAddingCollapsed" (addBook)="onAddBook($event)"></add-book-panel>
 
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
     @for (item of books; track item.id)
     {
         <book-card [book]="item" (cardClick)="onCardClick($event)"></book-card>
     }
+    <ng-template #newCardTemplate let-book="book">
+        <book-card [book]="book" (cardClick)="onCardClick($event)"></book-card>
+    </ng-template>
+    <ng-container #newCardsContainer></ng-container>
 </div>
 
 <book-details-dialog #bookDialog></book-details-dialog>

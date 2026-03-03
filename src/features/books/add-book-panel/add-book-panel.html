@@ -1,0 +1,30 @@
+<div class="add-panel panel">
+    <div class="add-param"><h3>Добавить книгу:</h3></div>
+    <div class="add-param">
+        <p>Автор:</p>
+        <p><input type="text" [(ngModel)]="authorValue"/></p>
+    </div>
+    <div class="add-param">
+        <p>Название:</p>
+        <p><input type="text" [(ngModel)]="titleValue"/></p></div>
+    <div class="add-param">
+        <p>Год:</p>
+        <p><input type="text" [(ngModel)]="yearValue"/></p></div>
+    <div class="add-param">
+        <p>Жанры:</p>
+        <p><select #searchGenres (change)="onSelectGenre(searchGenres.value);">
+                <option value="{{null}}">--</option>
+                @for(genre of genres; track genre)
+                {
+                <option value="{{genre}}">{{genre}}</option>
+                }
+            </select></p>
+    </div>
+    <div class="add-param">
+        <p>Рейтинг:</p>
+        <p><input type="number" [(ngModel)]="ratingValue"/></p></div>
+    <div class="add-param">
+        <p>Ссылка на картинку:</p>
+        <p><input type="text" [(ngModel)]="coverUrlValue"/></p></div>
+    <button id="add" (click)="onAddBook()">Добавить</button>
+</div>
