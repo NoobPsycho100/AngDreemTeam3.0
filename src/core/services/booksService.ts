@@ -1,21 +1,10 @@
-import { AllBooks } from '../mock/books.mock';
-import { Book } from './books';
+import { AllBooks } from '../../mock/books.mock';
+import { Book } from '../data/books';
+import { Filtering, Ordering } from '../paging';
 
-export type SortDirection = 'asc' | 'desc' | null;
-
-export type Ordering<T> = {
-    SortParam: keyof T;
-    SortDirection: SortDirection;
-};
-
-export type Filtering<T> = {
-    FilterParam: keyof T;
-    FilterValue: any | null;
-};
-
-export class BooksProvider
+export class BooksService
 {
-    public static Provider: BooksProvider = new BooksProvider();
+    public static Service: BooksService = new BooksService();
     private constructor()
     {}
 

@@ -1,4 +1,4 @@
-import { Book } from "../core/books";
+import { Book } from "../core/data/books";
 
 export const AllBooks: Book[] = [
     {

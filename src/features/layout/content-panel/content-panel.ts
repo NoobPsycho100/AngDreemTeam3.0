@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BooksPanel } from '../../books/books-panel';
+import { BooksPanel } from '../../books/books-panel/books-panel';
 
 @Component({
   selector: 'content-panel',

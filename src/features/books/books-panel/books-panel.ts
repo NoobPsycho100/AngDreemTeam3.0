@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { BookCardComponent } from './book-card';
-import { BooksProvider, Filtering, Ordering, SortDirection } from '../../core/booksProvider';
-import { Book, AllGenres, GenreEnum } from '../../core/books';
 import { FormsModule } from "@angular/forms";
-import { SortControl } from './sort-control';
+import { Filtering, Ordering, SortDirection } from '../../../core/paging';
+import { Book, AllGenres, GenreEnum } from '../../../core/data/books';
+import { BooksService } from '../../../core/services/booksService';
+import { SortControl } from '../../../shared/components/sort-control/sort-control';
+import { BookCardComponent } from '../book-card/book-card';
 
 @Component({
   selector: 'books-panel',
@@ -13,11 +14,11 @@ import { SortControl } from './sort-control';
 })
 export class BooksPanel {
 
-  private booksProvider: BooksProvider = BooksProvider.Provider;
+  private booksServcie: BooksService = BooksService.Service;
 
   protected isSeetingsCollapsed: boolean = true;
 
-  protected books: Book[] = this.booksProvider.GetAllBooks();
+  protected books: Book[] = this.booksServcie.GetAllBooks();
   protected genres: GenreEnum[] = AllGenres;
 
   protected searchAuthorValue: string = '';
@@ -57,6 +58,6 @@ export class BooksPanel {
     orders.push({SortParam: 'year', SortDirection: this.sortYearDirection});
     orders.push({SortParam: 'rating', SortDirection: this.sortRatingDirection});
 
-    this.books = this.booksProvider.SearchBooks(filters, orders, 10, 0);
+    this.books = this.booksServcie.SearchBooks(filters, orders, 10, 0);
   }
 }
