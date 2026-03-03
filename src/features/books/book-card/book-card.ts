@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Book } from '../../core/books';
-import { AppIfHighRating } from '../../shared/if-high-rating';
+import { Book } from '../../../core/data/books';
+import { AppIfHighRating } from '../../../shared/if-high-rating';
 
 @Component({
   selector: 'book-card',
@@ -8,8 +8,8 @@ import { AppIfHighRating } from '../../shared/if-high-rating';
   styleUrl: './book-card.less',
   imports: [AppIfHighRating]
 })
-export class BookCardComponent {
-
+export class BookCardComponent
+{
   @Input()
   public book!: Book;
 }

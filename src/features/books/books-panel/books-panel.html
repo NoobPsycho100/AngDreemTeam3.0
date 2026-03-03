@@ -1,0 +1,9 @@
+<p>Books: <button id="booksSettings" (click)="collapseSettings()"></button></p>
+<books-search-panel *ngIf="!isSeetingsCollapsed" (search)="onSearch($event)"></books-search-panel>
+
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    @for (item of books; track item.id)
+    {
+        <book-card [book]="item"></book-card>
+    }
+</div>

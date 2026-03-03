@@ -1,23 +1,19 @@
-import { Component } from '@angular/core';
-import { BookCardComponent } from './book-card';
-import { BooksProvider, Filtering, Ordering, SortDirection } from '../../core/booksProvider';
-import { Book, AllGenres, GenreEnum } from '../../core/books';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from "@angular/forms";
-import { SortControl } from './sort-control';
+import { Filtering, Ordering, Search, SortDirection } from '../../../core/paging';
+import { Book, AllGenres, GenreEnum } from '../../../core/data/books';
+import { SortControl } from '../../../shared/components/sort-control/sort-control';
 
 @Component({
-  selector: 'books-panel',
-  imports: [BookCardComponent, FormsModule, SortControl],
-  templateUrl: './books-panel.html',
-  styleUrl: './books-panel.less'
+  selector: 'books-search-panel',
+  imports: [FormsModule, SortControl],
+  templateUrl: './books-search-panel.html',
+  styleUrl: './books-search-panel.less'
 })
-export class BooksPanel {
-
-  private booksProvider: BooksProvider = BooksProvider.Provider;
-
+export class BooksSearchPanel
+{
   protected isSeetingsCollapsed: boolean = true;
 
-  protected books: Book[] = this.booksProvider.GetAllBooks();
   protected genres: GenreEnum[] = AllGenres;
 
   protected searchAuthorValue: string = '';
@@ -31,17 +27,15 @@ export class BooksPanel {
   protected sortYearDirection: SortDirection = null;
   protected sortRatingDirection: SortDirection = null;
 
-  protected collapseSettings()
-  {
-    this.isSeetingsCollapsed = !this.isSeetingsCollapsed;
-  }
+  @Output()
+  public search = new EventEmitter<Search<Book>>();
 
   protected onSelectGenre(genre: string)
   {
     this.searchGenreValue = genre as GenreEnum | null;
   }
 
-  protected search()
+  protected onSearch()
   {
     let filters: Filtering<Book>[] = [];
     let orders: Ordering<Book>[] = [];
@@ -57,6 +51,6 @@ export class BooksPanel {
     orders.push({SortParam: 'year', SortDirection: this.sortYearDirection});
     orders.push({SortParam: 'rating', SortDirection: this.sortRatingDirection});
 
-    this.books = this.booksProvider.SearchBooks(filters, orders, 10, 0);
+    this.search.emit({Filters: filters, Orders: orders, Skip: 0, Take: 10});
   }
 }
