@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Book } from '../../../core/data/books';
 import { AppIfHighRating } from '../../../shared/if-high-rating';
 
@@ -12,4 +12,13 @@ export class BookCardComponent
 {
   @Input()
   public book!: Book;
+
+  @Output()
+  public cardClick: EventEmitter<Book> = new EventEmitter<Book>();
+
+  @HostListener("click") 
+  protected onClick()
+  {
+    this.cardClick.emit(this.book);
+  }
 }

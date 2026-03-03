@@ -4,6 +4,8 @@
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
     @for (item of books; track item.id)
     {
-        <book-card [book]="item"></book-card>
+        <book-card [book]="item" (cardClick)="onCardClick($event)"></book-card>
     }
 </div>
+
+<book-details-dialog #bookDialog></book-details-dialog>
