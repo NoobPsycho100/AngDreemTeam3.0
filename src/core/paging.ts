@@ -9,3 +9,10 @@ export type Filtering<T> = {
     FilterParam: keyof T;
     FilterValue: any | null;
 };
+
+export type Search<T> = {
+    Filters: Filtering<T>[];
+    Orders: Ordering<T>[];
+    Skip: number;
+    Take: number;
+}

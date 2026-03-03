@@ -1,34 +1,6 @@
 <p>Books: <button id="booksSettings" (click)="collapseSettings()"></button></p>
-@if (!isSeetingsCollapsed)
-{
-    <div class="search-panel panel">
-        <div class="search-param"><h3>Поиск книг:</h3></div>
-        <div class="search-param">
-            <p>Автор: <sort-control [(sortDirection)]="sortAuthorDirection" /></p>
-            <p><input type="text" #searchAuthor [(ngModel)]="searchAuthorValue"/></p>
-        </div>
-        <div class="search-param">
-            <p>Название: <sort-control [(sortDirection)]="sortTitleDirection" /></p>
-            <p><input type="text" #searchTitle [(ngModel)]="searchTitleValue"/></p></div>
-        <div class="search-param">
-            <p>Год: <sort-control [(sortDirection)]="sortYearDirection" /></p>
-            <p><input type="text" #searchYear [(ngModel)]="searchYearValue"/></p></div>
-        <div class="search-param">
-            <p>Жанры:</p>
-            <p><select #searchGenres (change)="onSelectGenre(searchGenres.value);">
-                    <option value="{{null}}">--</option>
-                    @for(genre of genres; track genre)
-                    {
-                    <option value="{{genre}}">{{genre}}</option>
-                    }
-                </select></p>
-        </div>
-        <div class="search-param">
-            <p>Рейтинг от: <sort-control [(sortDirection)]="sortRatingDirection" /></p>
-            <p><input type="number" #searchRating [(ngModel)]="searchRatingValue"/></p></div>
-        <button id="search" (click)="search()">Искать</button>
-    </div>
-}
+<books-search-panel *ngIf="!isSeetingsCollapsed" (search)="onSearch($event)"></books-search-panel>
+
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
     @for (item of books; track item.id)
     {
