@@ -7,14 +7,16 @@ import { IBooksService } from './ibooksService';
 @Injectable()
 export class BooksService implements IBooksService
 {
+    private allBooks: Book[] = AllBooks;
+
     public GetAllBooks()
     {
-        return [...AllBooks];
+        return [...this.allBooks];
     }
 
     public SearchBooks(filters: Filtering<Book>[], orderBy: Ordering<Book>[], take: number, skip: number)
     {
-        var books = [...AllBooks];
+        var books = [...this.allBooks];
         for (let filter of filters)
         {
             if (filter.FilterParam === 'author' && filter.FilterValue)
@@ -64,5 +66,19 @@ export class BooksService implements IBooksService
         }
 
         return books;
+    }
+
+    public AddBook(book: Book)
+    {
+        this.allBooks = [...this.allBooks, book];
+    }
+
+    public MarkBookAsFavorite(bookId: number, isFavorite: boolean)
+    {
+        for (let book of this.allBooks)
+        {
+            if (book.id === bookId)
+                book.isFavorite = isFavorite;
+        }
     }
 };

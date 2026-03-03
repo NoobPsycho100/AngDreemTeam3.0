@@ -1,6 +1,7 @@
-import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, inject, Input, Output } from '@angular/core';
 import { Book } from '../../../core/data/books';
 import { AppIfHighRating } from '../../../shared/if-high-rating';
+import { IBooksService, IBooksServiceToken } from '../../../core/services/ibooksService';
 
 @Component({
   selector: 'book-card',
@@ -10,6 +11,8 @@ import { AppIfHighRating } from '../../../shared/if-high-rating';
 })
 export class BookCardComponent
 {
+  private booksService: IBooksService = inject(IBooksServiceToken);
+
   @Input()
   public book!: Book;
 
@@ -39,5 +42,11 @@ export class BookCardComponent
   protected onUnHover()
   {
     this.isHoverClass = false;
+  }
+
+  protected markFavorite(isFavorite: boolean, event: any)
+  {
+    this.booksService.MarkBookAsFavorite(this.book.id, isFavorite);
+    event.stopPropagation();
   }
 }

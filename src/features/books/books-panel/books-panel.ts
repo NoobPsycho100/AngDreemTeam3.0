@@ -17,12 +17,12 @@ import { AddBookPanel } from '../add-book-panel/add-book-panel';
 })
 export class BooksPanel
 {
-  private booksServcie: IBooksService = inject(IBooksServiceToken);
+  private booksService: IBooksService = inject(IBooksServiceToken);
 
   protected isSeetingsCollapsed: boolean = true;
   protected isAddingCollapsed: boolean = true;
 
-  protected books: Book[] = this.booksServcie.GetAllBooks();
+  protected books: Book[] = this.booksService.GetAllBooks();
 
   @ViewChild("bookDialog") 
   private bookDialog!: BookDetailsDialogComponent;
@@ -45,7 +45,7 @@ export class BooksPanel
 
   protected onSearch(search: Search<Book>)
   {
-    this.books = this.booksServcie.SearchBooks(search.Filters, search.Orders, search.Take, search.Skip);
+    this.books = this.booksService.SearchBooks(search.Filters, search.Orders, search.Take, search.Skip);
   }
 
   protected onCardClick(book: Book)
@@ -56,5 +56,6 @@ export class BooksPanel
   protected onAddBook(book: Book)
   {
     this.newCardsContainer.createEmbeddedView(this.newCardTemplate, { book: book });
+    this.booksService.AddBook(book);
   }
 }

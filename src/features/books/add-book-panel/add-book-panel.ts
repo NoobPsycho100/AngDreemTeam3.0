@@ -39,6 +39,7 @@ export class AddBookPanel
       genres: [this.genreValue],
       rating: this.ratingValue,
       coverUrl: this.coverUrlValue,
+      isFavorite: false,
     });
   }
 }

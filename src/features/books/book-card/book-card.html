@@ -7,7 +7,18 @@
     {
         <img class="cover" src="icons/no-cover.png" alt="нет обложки" />
     }
-    <p><b>{{book.title}}</b><span *appIfHighRating="book.rating" style="font-size: 200%; color: yellow; text-shadow: 2px 2px #ff0000;">★</span></p>
+    <p>
+        <b>{{book.title}}</b>
+        <span *appIfHighRating="book.rating" style="font-size: 200%; color: yellow; text-shadow: 2px 2px #ff0000;">★</span>
+        @if (book.isFavorite)
+        {
+            <span style="font-size: 200%; color: yellow; text-shadow: 2px 2px #ff0000;" (click)="markFavorite(false, $event)">♥︎</span>
+        }
+        @else
+        {
+            <span style="font-size: 200%; color: yellow; text-shadow: 2px 2px #ff0000;" (click)="markFavorite(true, $event)">♡</span>
+        }
+    </p>
     <p>Автор: {{book.author}}</p>
     <p>Год издания: {{book.year}}</p>
     <p>Жанр: 
