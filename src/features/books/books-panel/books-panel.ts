@@ -1,9 +1,9 @@
-import { Component, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, inject, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormsModule } from "@angular/forms";
-import { Search, SortDirection } from '../../../core/paging';
-import { Book, AllGenres, GenreEnum } from '../../../core/data/books';
-import { BooksService } from '../../../core/services/booksService';
+import { Search } from '../../../core/paging';
+import { Book} from '../../../core/data/books';
+import { IBooksService, IBooksServiceToken } from '../../../core/services/ibooksService';
 import { BookCardComponent } from '../book-card/book-card';
 import { BooksSearchPanel } from '../books-search-panel/books-search-panel';
 import { BookDetailsDialogComponent } from '../book-details-dialog/book-details-dialog';
@@ -17,7 +17,7 @@ import { AddBookPanel } from '../add-book-panel/add-book-panel';
 })
 export class BooksPanel
 {
-  private booksServcie: BooksService = BooksService.Service;
+  private booksServcie: IBooksService = inject(IBooksServiceToken);
 
   protected isSeetingsCollapsed: boolean = true;
   protected isAddingCollapsed: boolean = true;

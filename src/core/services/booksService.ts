@@ -1,13 +1,12 @@
+import { Injectable } from '@angular/core';
 import { AllBooks } from '../../mock/books.mock';
 import { Book } from '../data/books';
 import { Filtering, Ordering } from '../paging';
+import { IBooksService } from './ibooksService';
 
-export class BooksService
+@Injectable()
+export class BooksService implements IBooksService
 {
-    public static Service: BooksService = new BooksService();
-    private constructor()
-    {}
-
     public GetAllBooks()
     {
         return [...AllBooks];
