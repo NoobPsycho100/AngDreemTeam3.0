@@ -1,8 +1,8 @@
 import { Component, inject, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormsModule } from "@angular/forms";
-import { Search } from '../../../core/paging';
-import { Book} from '../../../core/data/books';
+import { SearchRequest } from '../../../core/paging';
+import { Book } from '../../../core/data/books';
 import { IBooksService, IBooksServiceToken } from '../../../core/services/ibooksService';
 import { BookCardComponent } from '../book-card/book-card';
 import { BooksSearchPanel } from '../books-search-panel/books-search-panel';
@@ -17,14 +17,14 @@ import { AddBookPanel } from '../add-book-panel/add-book-panel';
 })
 export class BooksPanel
 {
-  private booksService: IBooksService = inject(IBooksServiceToken);
+  private readonly booksService: IBooksService = inject(IBooksServiceToken);
 
   protected isSeetingsCollapsed: boolean = true;
   protected isAddingCollapsed: boolean = true;
 
-  protected books: Book[] = this.booksService.GetAllBooks();
+  protected books: Book[] = this.booksService.getAllBooks();
 
-  @ViewChild("bookDialog") 
+  @ViewChild('bookDialog') 
   private bookDialog!: BookDetailsDialogComponent;
 
   @ViewChild('newCardTemplate', { read: TemplateRef })
@@ -43,9 +43,9 @@ export class BooksPanel
     this.isAddingCollapsed = !this.isAddingCollapsed;
   }
 
-  protected onSearch(search: Search<Book>)
+  protected onSearch(search: SearchRequest<Book>)
   {
-    this.books = this.booksService.SearchBooks(search.Filters, search.Orders, search.Take, search.Skip);
+    this.books = this.booksService.searchBooks(search);
   }
 
   protected onCardClick(book: Book)
@@ -56,6 +56,6 @@ export class BooksPanel
   protected onAddBook(book: Book)
   {
     this.newCardsContainer.createEmbeddedView(this.newCardTemplate, { book: book });
-    this.booksService.AddBook(book);
+    this.booksService.addBook(book);
   }
 }

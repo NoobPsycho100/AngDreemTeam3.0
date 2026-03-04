@@ -1,16 +1,16 @@
 import { InjectionToken } from "@angular/core";
 import { Book } from "../data/books";
-import { Filtering, Ordering } from "../paging";
+import { SearchRequest } from "../paging";
 
 export interface IBooksService
 {
-    GetAllBooks(): Book[];
+    getAllBooks(): Book[];
 
-    SearchBooks(filters: Filtering<Book>[], orderBy: Ordering<Book>[], take: number, skip: number): Book[];
+    searchBooks(search: SearchRequest<Book>): Book[];
 
-    AddBook(book: Book): void;
+    addBook(book: Book): void;
 
-    MarkBookAsFavorite(bookId: number, isFavorite: boolean): void;
+    markBookAsFavorite(bookId: number, isFavorite: boolean): void;
 }
 
 export const IBooksServiceToken = new InjectionToken<IBooksService>('IBooksService');

@@ -2,14 +2,14 @@
     <div class="add-param"><h3>Добавить книгу:</h3></div>
     <div class="add-param">
         <p>Автор:</p>
-        <p><input type="text" [(ngModel)]="authorValue"/></p>
+        <p><input type="text" [(ngModel)]="newBook.author"/></p>
     </div>
     <div class="add-param">
         <p>Название:</p>
-        <p><input type="text" [(ngModel)]="titleValue"/></p></div>
+        <p><input type="text" [(ngModel)]="newBook.title"/></p></div>
     <div class="add-param">
         <p>Год:</p>
-        <p><input type="text" [(ngModel)]="yearValue"/></p></div>
+        <p><input type="text" [(ngModel)]="newBook.year"/></p></div>
     <div class="add-param">
         <p>Жанры:</p>
         <p><select #searchGenres (change)="onSelectGenre(searchGenres.value);">
@@ -22,9 +22,9 @@
     </div>
     <div class="add-param">
         <p>Рейтинг:</p>
-        <p><input type="number" [(ngModel)]="ratingValue"/></p></div>
+        <p><input type="number" [(ngModel)]="newBook.rating"/></p></div>
     <div class="add-param">
         <p>Ссылка на картинку:</p>
-        <p><input type="text" [(ngModel)]="coverUrlValue"/></p></div>
+        <p><input type="text" [(ngModel)]="newBook.coverUrl"/></p></div>
     <button id="add" (click)="onAddBook()">Добавить</button>
 </div>

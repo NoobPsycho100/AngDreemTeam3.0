@@ -1,13 +1,14 @@
 import { Component, EventEmitter, HostBinding, HostListener, inject, Input, Output } from '@angular/core';
 import { Book } from '../../../core/data/books';
-import { AppIfHighRating } from '../../../shared/if-high-rating';
+import { AppIfHighRating } from '../../../shared/directives/if-high-rating';
+import { ArrayJoinPipe } from '../../../shared/pipes/join';
 import { IBooksService, IBooksServiceToken } from '../../../core/services/ibooksService';
 
 @Component({
   selector: 'book-card',
   templateUrl: './book-card.html',
   styleUrl: './book-card.less',
-  imports: [AppIfHighRating]
+  imports: [AppIfHighRating, ArrayJoinPipe]
 })
 export class BookCardComponent
 {
@@ -46,7 +47,7 @@ export class BookCardComponent
 
   protected markFavorite(isFavorite: boolean, event: any)
   {
-    this.booksService.MarkBookAsFavorite(this.book.id, isFavorite);
+    this.booksService.markBookAsFavorite(this.book.id, isFavorite);
     event.stopPropagation();
   }
 }
