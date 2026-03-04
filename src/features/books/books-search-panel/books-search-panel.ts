@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from "@angular/forms";
-import { Filtering, Ordering, Search, SortDirection } from '../../../core/paging';
+import { Ordering, SearchRequest, SortDirection } from '../../../core/paging';
 import { Book, AllGenres, GenreEnum } from '../../../core/data/books';
 import { SortControl } from '../../../shared/components/sort-control/sort-control';
 
@@ -20,7 +20,7 @@ export class BooksSearchPanel
   protected searchTitleValue: string = '';
   protected searchYearValue: number | null = null;
   protected searchRatingValue: number = 0;
-  protected searchGenreValue: GenreEnum | null = null;
+  protected searchGenreValue: GenreEnum | null | '' = null;
 
   protected sortAuthorDirection: SortDirection = null;
   protected sortTitleDirection: SortDirection = null;
@@ -28,29 +28,34 @@ export class BooksSearchPanel
   protected sortRatingDirection: SortDirection = null;
 
   @Output()
-  public search = new EventEmitter<Search<Book>>();
+  public search = new EventEmitter<SearchRequest<Book>>();
 
   protected onSelectGenre(genre: string)
   {
-    this.searchGenreValue = genre as GenreEnum | null;
+    this.searchGenreValue = genre as GenreEnum | null | '';
   }
 
   protected onSearch()
   {
-    let filters: Filtering<Book>[] = [];
+    let filters: ((x: Book) => boolean)[] = [];
     let orders: Ordering<Book>[] = [];
     
-    filters.push({FilterParam: 'author', FilterValue: this.searchAuthorValue});
-    filters.push({FilterParam: 'title', FilterValue: this.searchTitleValue});
-    filters.push({FilterParam: 'year', FilterValue: this.searchYearValue});
-    filters.push({FilterParam: 'rating', FilterValue: this.searchRatingValue});
-    filters.push({FilterParam: 'genres', FilterValue: this.searchGenreValue});
+    if (this.searchAuthorValue)
+      filters.push(x => x.author.indexOf(this.searchAuthorValue) >= 0);
+    if (this.searchTitleValue)
+      filters.push(x => x.title.indexOf(this.searchTitleValue) >= 0);
+    if (this.searchYearValue)
+      filters.push(x => x.year == this.searchYearValue);
+    if (this.searchRatingValue)
+      filters.push(x => x.rating >= this.searchRatingValue);
+    if (this.searchGenreValue != null && this.searchGenreValue != '')
+      filters.push(x => x.genres.indexOf(this.searchGenreValue as GenreEnum) >= 0);
 
-    orders.push({SortParam: 'author', SortDirection: this.sortAuthorDirection});
-    orders.push({SortParam: 'title', SortDirection: this.sortTitleDirection});
-    orders.push({SortParam: 'year', SortDirection: this.sortYearDirection});
-    orders.push({SortParam: 'rating', SortDirection: this.sortRatingDirection});
+    orders.push({sortParam: 'author', sortDirection: this.sortAuthorDirection});
+    orders.push({sortParam: 'title', sortDirection: this.sortTitleDirection});
+    orders.push({sortParam: 'year', sortDirection: this.sortYearDirection});
+    orders.push({sortParam: 'rating', sortDirection: this.sortRatingDirection});
 
-    this.search.emit({Filters: filters, Orders: orders, Skip: 0, Take: 10});
+    this.search.emit({ filters: filters, orders: orders, skip: 0, take: 10 });
   }
 }
