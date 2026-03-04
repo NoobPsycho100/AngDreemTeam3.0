@@ -14,31 +14,26 @@ export class AddBookPanel
 
   protected genres: GenreEnum[] = AllGenres;
 
-  protected authorValue: string = '';
-  protected titleValue: string = '';
-  protected yearValue: number = 2026;
-  protected ratingValue: number = 0;
-  protected genreValue: GenreEnum = 'Детектив';
-  protected coverUrlValue: string = '';
+  protected newBook: Book = {
+    id: 0,
+    author: '',
+    title: '',
+    year: 2026,
+    rating: 0,
+    genres: ['Детектив'],
+    coverUrl: '',
+  };
 
   @Output()
   public addBook = new EventEmitter<Book>();
 
   protected onSelectGenre(genre: string)
   {
-    this.genreValue = genre as GenreEnum;
+    this.newBook.genres = [genre as GenreEnum];
   }
 
   protected onAddBook()
   {
-    this.addBook.emit({
-      id: 0,
-      title: this.titleValue,
-      author: this.authorValue,
-      year: this.yearValue,
-      genres: [this.genreValue],
-      rating: this.ratingValue,
-      coverUrl: this.coverUrlValue,
-    });
+    this.addBook.emit({...this.newBook});
   }
 }

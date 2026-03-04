@@ -1,14 +1,16 @@
 import { Component, ElementRef, EventEmitter, Input, Output, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Book } from '../../../core/data/books';
+import { ArrayJoinPipe } from '../../../shared/pipes/join';
 
 @Component({
   selector: 'book-details-dialog',
   templateUrl: './book-details-dialog.html',
-  styleUrl: './book-details-dialog.less'
+  styleUrl: './book-details-dialog.less',
+  imports: [ArrayJoinPipe]
 })
 export class BookDetailsDialogComponent
 {
-  @ViewChild("bookDialog") 
+  @ViewChild('bookDialog') 
   private bookDialog!: ElementRef<HTMLDialogElement>;
 
   @ViewChild('cardTemplate', { read: TemplateRef })

@@ -24,7 +24,7 @@ export class BooksPanel
 
   protected books: Book[] = this.booksServcie.GetAllBooks();
 
-  @ViewChild("bookDialog") 
+  @ViewChild('bookDialog') 
   private bookDialog!: BookDetailsDialogComponent;
 
   @ViewChild('newCardTemplate', { read: TemplateRef })
