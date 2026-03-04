@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Book } from '../../../core/data/books';
-import { AppIfHighRating } from '../../../shared/if-high-rating';
+import { AppIfHighRating } from '../../../shared/directives/if-high-rating';
 import { ArrayJoinPipe } from '../../../shared/pipes/join';
 
 @Component({

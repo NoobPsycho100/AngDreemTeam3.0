@@ -16,7 +16,10 @@ export class AppIfHighRating{
     {
         if (rating > 4.3)
         {
-            this.viewContainer.createEmbeddedView(this.templateRef);
+            if (this.viewContainer.length == 0)
+            {
+                this.viewContainer.createEmbeddedView(this.templateRef);
+            }
         } 
         else
         {
