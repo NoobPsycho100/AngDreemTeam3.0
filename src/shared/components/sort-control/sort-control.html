@@ -1,0 +1,4 @@
+<input type="checkbox" #ascCheckbox 
+    (change)="descCheckbox.checked = false; onSortDirectionChanged(sortDirection = ascCheckbox.checked ? 'asc' : null);" />↑ 
+<input type="checkbox" #descCheckbox 
+    (change)="ascCheckbox.checked = false; onSortDirectionChanged(sortDirection = descCheckbox.checked ? 'desc' : null);" />↓
