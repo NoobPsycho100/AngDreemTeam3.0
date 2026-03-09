@@ -1,0 +1,14 @@
+<dialog #bookDialog>
+    <ng-template #cardTemplate let-book="book">
+        <div class="card">
+            <img class="cover" [attr.src]="!!book.coverUrl ? book.coverUrl : 'icons/no-cover.png'" [attr.alt]="!!book.coverUrl ? undefined : 'нет обложки'"  />
+            <p><b>{{book.title}}</b></p>
+            <p>Автор: {{book.author}}</p>
+            <p>Год издания: {{book.year}}</p>
+            <p>Жанр: {{book.genres | join: ', '}}</p>
+            <p>Рейтинг: {{book.rating}}</p>
+        </div>
+    </ng-template>
+    <ng-container #cardContainer></ng-container>
+    <p><button (click)="CloseDialog()">Close</button></p>
+</dialog>

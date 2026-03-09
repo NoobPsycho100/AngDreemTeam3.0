@@ -12,8 +12,6 @@ import { SortControl } from '../../../shared/components/sort-control/sort-contro
 })
 export class BooksSearchPanel
 {
-  protected isSeetingsCollapsed: boolean = true;
-
   protected genres: GenreEnum[] = AllGenres;
 
   protected searchAuthorValue: string = '';
