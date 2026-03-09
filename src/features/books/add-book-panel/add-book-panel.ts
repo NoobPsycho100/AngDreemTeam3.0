@@ -22,6 +22,7 @@ export class AddBookPanel
     rating: 0,
     genres: ['Детектив'],
     coverUrl: '',
+    isFavorite: false,
   };
 
   @Output()

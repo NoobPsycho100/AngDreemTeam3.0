@@ -9,4 +9,5 @@ export interface Book {
     genres: GenreEnum[];
     rating: number;
     coverUrl?: string;
+    isFavorite: boolean;
 }
